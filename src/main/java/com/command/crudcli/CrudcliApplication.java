@@ -17,7 +17,7 @@ public class CrudcliApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 		return runner -> {
-			createStudent(studentDAO);
+			readStudent(studentDAO);
 		};
 	}
 
@@ -31,6 +31,22 @@ public class CrudcliApplication {
 
 		// display id of the saved student
 		System.out.println("Saved student. Generated id: " + student.getId());
+	}
+
+	private void readStudent(StudentDAO studentDAO) {
+		// create student object
+		System.out.println("Creating a new student object...");
+		Student student = new Student("Daffy", "Duck", "daffy@microsoft.com");
+
+		// save the student
+		studentDAO.save(student);
+
+		// display id of the saved student
+		System.out.println("Saved student. Generated id: " + student.getId());
+
+		// retrieve student
+		Student retrivedStudent = studentDAO.findById(1);
+		System.out.println(retrivedStudent.toString());
 	}
 
 }
