@@ -19,7 +19,7 @@ public class CrudcliApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 		return runner -> {
-			deleteAllStudents(studentDAO);
+			createMultipleStudents(studentDAO);
 		};
 	}
 
@@ -68,6 +68,21 @@ public class CrudcliApplication {
 		for (Student student: studentDAO.findAll()) {
 			System.out.println(student);
 		}
+	}
+
+	private void createMultipleStudents(StudentDAO studentDAO) {
+		System.out.println("Creating a new student object...");
+
+		Student student = new Student("Sounak", "Saha", "sounak.saha@google.com");
+		studentDAO.save(student);
+
+		student = new Student("Ankan", "Ramos", "ankan@apple.com");
+		studentDAO.save(student);
+
+		student = new Student("Ankita", "Dutta", "ankita@microsoft.com");
+		studentDAO.save(student);
+
+		System.out.println("Students saved successfully!");
 	}
 
 	private void createStudent(StudentDAO studentDAO) {
