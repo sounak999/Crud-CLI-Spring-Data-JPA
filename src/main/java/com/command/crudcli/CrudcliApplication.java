@@ -19,8 +19,22 @@ public class CrudcliApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 		return runner -> {
-			findAllStudentsByLastName(studentDAO);
+			updateStudent(studentDAO);
 		};
+	}
+
+	private void updateStudent(StudentDAO studentDAO) {
+		int studentId = 4;
+		Student currentStudent = studentDAO.findById(studentId);
+
+		currentStudent.setFirstName("Scooby");
+		currentStudent.setLastName("Doo");
+		currentStudent.setEmail("scooby.doo@microsoft.com");
+
+		System.out.println("Updating the student...");
+		studentDAO.update(currentStudent);
+
+		System.out.println("Updated student: " + currentStudent);
 	}
 
 	private void findAllStudentsByLastName(StudentDAO studentDAO) {
