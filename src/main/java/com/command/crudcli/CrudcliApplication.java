@@ -17,8 +17,16 @@ public class CrudcliApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 		return runner -> {
-			readStudent(studentDAO);
+			findAllStudents(studentDAO);
 		};
+	}
+
+	private void findAllStudents(StudentDAO studentDAO) {
+		System.out.println("List of all the registered students:- \n");
+
+		for (Student student: studentDAO.findAll()) {
+			System.out.println(student);
+		}
 	}
 
 	private void createStudent(StudentDAO studentDAO) {
