@@ -2,6 +2,7 @@ package com.command.crudcli.dao;
 
 import com.command.crudcli.entity.Student;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -59,5 +60,12 @@ public class StudentDAOImpl implements StudentDAO {
     public void delete(Integer id) {
         Student student = entityManager.find(Student.class, id);
         entityManager.remove(student);
+    }
+
+    @Override
+    @Transactional
+    public int deleteAll() {
+        Query deleteQuery = entityManager.createQuery("DELETE FROM Student");
+        return deleteQuery.executeUpdate();
     }
 }

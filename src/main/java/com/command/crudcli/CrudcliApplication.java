@@ -19,8 +19,16 @@ public class CrudcliApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 		return runner -> {
-			deleteStudent(studentDAO);
+			deleteAllStudents(studentDAO);
 		};
+	}
+
+	private void deleteAllStudents(StudentDAO studentDAO) {
+		System.out.println("Deleting all students...");
+
+		int totalDeletedStudents = studentDAO.deleteAll();
+
+		System.out.println("Total deleted students: " + totalDeletedStudents);
 	}
 
 	private void deleteStudent(StudentDAO studentDAO) {
